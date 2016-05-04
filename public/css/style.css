@@ -25,3 +25,7 @@
 
     overflow: auto;
 }
+
+.taskItem:hover{
+    background-color: #2e3436;
+}

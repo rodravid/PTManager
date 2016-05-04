@@ -26,8 +26,11 @@ Route::group(['middleware' => ['web']], function() {
 
     Route::group(['middleware' => ['auth']], function() {
 
-        Route::get('/task', 'TaskController@index');
-        Route::post('/task', 'TaskController@indexPost');
+        Route::get('projects', 'ProjectController@index');
+
+        Route::get('/tasks', 'TaskController@index');
+        Route::post('/tasks', 'TaskController@indexPost');
+        Route::delete('/tasks/{id}', 'TaskController@indexDelete');
 
     });
 

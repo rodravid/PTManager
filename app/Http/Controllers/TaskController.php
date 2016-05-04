@@ -11,12 +11,19 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::all();
-        return view('welcome', compact('tasks'));
+        return view('tasks', compact('tasks'));
     }
 
     public function indexPost(Request $request)
     {
         Task::create($request->all());
+        return redirect()->back();
+    }
+
+    public function indexDelete($id)
+    {
+        $task = Task::find($id);
+        $task->delete();
         return redirect()->back();
     }
 }
