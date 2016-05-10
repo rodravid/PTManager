@@ -1,36 +1,21 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-
-
-/*
- | ------------------------------------------------
- | Application Routes
- | ------------------------------------------------
- | This route group applies the "web" middleware group to every rout
- | it contains. The "web" middleware group is defined in your HTTP
- | kernel and includes session state, CSRF protection and more.
- |
- */
 Route::group(['middleware' => ['web']], function() {
 
     Route::group(['middleware' => ['auth']], function() {
 
-        Route::get('projects', 'ProjectController@index');
+        Route::get('/projects', 'ProjectController@get')->name('projects.index');;
+        Route::post('/projects/save', 'ProjectController@save')->name('projects.save');
+        Route::post('/projects/{id}/edit', 'ProjectController@edit');
+        Route::patch('/projects/update/{id}', 'ProjectController@update');
 
-        Route::get('/tasks', 'TaskController@index');
-        Route::post('/tasks', 'TaskController@indexPost');
-        Route::delete('/tasks/{id}', 'TaskController@indexDelete');
+        Route::delete('/projects/{id}/delete', 'ProjectController@delete');
+
+        Route::get('/tasks/view/{id}', 'TaskController@get');
+        Route::post('/tasks/save', 'TaskController@save')->name('tasks.save');
+        Route::get('/task/{id}/edit', 'TaskController@edit')->name('tasks.edit');
+        Route::patch('/task/{id}/update', 'TaskController@update');
+        Route::delete('/task/{id}/delete', 'TaskController@delete');
 
     });
 
@@ -38,5 +23,5 @@ Route::group(['middleware' => ['web']], function() {
 });
 
 Route::auth();
-Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'ProjectController@get');
+Route::get('/home', 'ProjectController@get');

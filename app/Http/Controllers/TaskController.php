@@ -2,25 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Task\TaskRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Task;
 use App\Http\Requests;
 
 class TaskController extends Controller
 {
-    public function index()
+    private $repository;
+
+    public function __construct(TaskRepositoryInterface $repository)
     {
-        $tasks = Task::all();
-        return view('tasks', compact('tasks'));
+        $this->repository = $repository;
     }
 
-    public function indexPost(Request $request)
+    public function get($project)
     {
-        Task::create($request->all());
+        $info = $this->repository->find($project);
+        return view('task.tasks', compact('info'));
+    }
+
+    public function save(Request $request)
+    {
+        $this->repository->save($request);
         return redirect()->back();
+
     }
 
-    public function indexDelete($id)
+    public function edit($id)
+    {
+        $task = $this->repository->findById($id);
+
+        return view('task.editTask', compact('task'));
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        //Validation
+        $this->repository->update($request, $id);
+
+        return redirect('/tasks/view/'.$request->project_id);
+    }
+
+    public function delete($id)
     {
         $task = Task::find($id);
         $task->delete();

@@ -1,3 +1,11 @@
+body {
+    font-family: 'Lato';
+}
+
+.fa-btn {
+    margin-right: 6px;
+}
+
 .top-bar{
     border-bottom: 1px solid rgba(255,255,255,0.1);
     float: left;
@@ -8,18 +16,17 @@
     background-color: #000;
 }
 
+.projects{
+    height: 600px;
+}
+
 .contentField{
     margin-top: 13px;
 }
 
-.tasksField{
+.taskItem, .projectItem{
     width: 100%;
-    height: 400px;
-}
-
-.taskItem{
-    width: 100%;
-    height: 200px;
+    height: 150px;
 
     display: inline-block;
 
@@ -27,5 +34,27 @@
 }
 
 .taskItem:hover{
-    background-color: #2e3436;
+    background-color: #bababa;
+}
+
+.projectItem:hover{
+    background-color: #bababa;
+}
+
+.btn-form{
+    margin: 30px 50px 0px 10px;
+}
+
+.btn-form, .btn-form-update, .btn-form-delete, .btn-return, .btn-save{
+    width: 100px;
+    height: 40px;
+
+}
+
+.btn-form-update{
+    margin: 30px 50px 0px 10px;
+}
+
+.btn-form-delete{
+    margin: 7px 50px 10px 10px;
 }
