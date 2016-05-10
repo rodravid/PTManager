@@ -18,7 +18,7 @@ class Task extends Model implements PresentableInterface
 
     public function status()
     {
-        return $this->hasOne(Status::class);
+        return $this->hasOne(RF_CODES::class);
     }
     
     public function getPresenter()

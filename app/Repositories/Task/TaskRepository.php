@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Task;
 
+use App\Http\Requests\TaskRequest;
 use App\Project;
 use App\Task;
 use Illuminate\Http\Request;

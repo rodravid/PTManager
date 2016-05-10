@@ -32,8 +32,6 @@ class Project extends Model
                 $one->delete();
             }
         });
-
-
     }
 
     public function tasks()

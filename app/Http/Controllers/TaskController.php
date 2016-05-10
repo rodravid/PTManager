@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
 use App\Repositories\Task\TaskRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Task;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {

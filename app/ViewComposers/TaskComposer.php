@@ -9,6 +9,6 @@ class TaskComposer
 {
     public function compose(View $view)
     {
-        $view->with('status', Status::all()->pluck('status', 'id')->toArray());
+        $view->with('status', Status::select('ref_id', 'name')->where('type', '=', 'Task_Status_Open')->pluck('name', 'ref_id')->toArray());
     }
 }

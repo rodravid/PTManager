@@ -1,9 +1,11 @@
 <?php
 
+namespace database\migrations;
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStatusTable extends Migration
+class CreateTableRFCODES extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +14,11 @@ class CreateStatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('status', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('status');
-            $table->timestamps();
+        Schema::create('RF_CODES', function (Blueprint $table) {
+            $table->increments('id')->unique();
+            $table->integer('ref_id');
+            $table->string('name');
+            $table->string('type');
         });
     }
 
@@ -26,6 +29,6 @@ class CreateStatusTable extends Migration
      */
     public function down()
     {
-        Schema::drop('status');
+        Schema::drop('RF_CODES');
     }
 }

@@ -10,8 +10,9 @@
             <div class="formInputTask row">
                 <form action="/tasks/save" method="POST">
                     <div class="col-md-5">
-                        <input type="text" name="title" class="form-control" placeholder="Titulo da Tarefa" required>
-                        <textarea type="text" name="description" class="form-control" placeholder="Descrição" required></textarea>
+                        <input type="hidden" name="project_id" class="form-control" value="{{ $info[1] }}">
+                        <input type="text" name="title" class="form-control" placeholder="Titulo da Tarefa">
+                        <textarea type="text" name="description" class="form-control" placeholder="Descrição"></textarea>
                         {{ Form::select('status', $status, null, ['class'=>'form-control']) }}
                         </br>
                         <button type="submit" class="btn btn-info btn-save">Salvar</button><a href="{{ URL::previous() }}" class="btn btn-default btn-return">Voltar</a>
