@@ -84,31 +84,31 @@
                         @else
                             @foreach($return['TasksReturned'] as $key => $task)
                                 <div class="taskItem row">
-                                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                                        <div class="nav navbar-nav col-md-5">
-                                            <h2 class="taskInfoHeader">#{{ $key+1 }} | {{ $task->title }}</h2>
-                                            <h3 class="sender">Remetente: {{ $task->user_name }}</h3>
-                                            <h4  class="description" name="description">{{ $task->description }}</h4>
-                                            <h4 class="taskInfoFooter">STATUS: {{ $task->getPresenter()->status }}  |  Prioridade: {{ $task->getPresenter()->priority }}</h4>
-                                        </div>
+                                    <div class="col-md-5 overlay">
+                                        <h2 class="taskInfoHeader">#{{ $key+1 }} | {{ $task->title }}</h2>
+                                        <h3 class="sender">Remetente: {{ $task->user_name }}</h3>
+                                        <h4  class="description" name="description">{{ $task->description }}</h4>
+                                        <h4 class="taskInfoFooter">STATUS: {{ $task->getPresenter()->status }}  |  Prioridade: {{ $task->getPresenter()->priority }}</h4>
+                                    </div>
 
-                                        <div class="col-md-5">
-                                            <h4 class="taskInfoDesignatedHeader">Designado para:</h4>
-                                        </div>
+                                    <div class="col-md-5">
+                                        <h4 class="taskInfoDesignatedHeader">Designado para:</h4>
+                                    </div>
 
-                                        <div class="nav navbar-nav navbar-right col-md-2">
-                                            <a href="/task/{{ $task->id }}/edit" class="btn btn-warning btn-form">Visualizar</a>
-                                            <form action="/task/{{ $task->id }}/delete" method="POST">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-danger btn-form-delete">Excluir</button>
-                                            </form>
-                                        </div>
+                                    <div class="pull-right col-md-2">
+                                        <a href="/task/{{ $task->id }}/edit" class="btn btn-warning btn-form">Visualizar</a>
+                                        <form action="/task/{{ $task->id }}/delete" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn btn-danger btn-form-delete">Excluir</button>
+                                        </form>
                                     </div>
                                 </div>
                             @endforeach
                         @endif
                     </div>
-                    {!! $return['TasksReturned']->links() !!}
+                    <div class="">
+                        {!! $return['TasksReturned']->links() !!}
+                    </div>
                 </div>
             </section>
         </div>
