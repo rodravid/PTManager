@@ -13,10 +13,12 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(
-            ['task.editTask', 'task.tasks'],
-            'App\ViewComposers\TaskComposer'
-        );
+        view()->composer([
+                    'task.editTask',
+                    'task.tasks'
+                ],
+            'App\ViewComposers\TaskComposer');
+
     }
 
     /**

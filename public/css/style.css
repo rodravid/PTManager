@@ -2,6 +2,10 @@ body {
     font-family: 'Lato';
 }
 
+.navigation-tabs{
+    margin: 0px 0px 10px 0px;
+}
+
 .fa-btn {
     margin-right: 6px;
 }
@@ -20,6 +24,10 @@ body {
     height: 600px;
 }
 
+.contentTasks{
+    height: 450px;
+}
+
 .contentField{
     margin-top: 13px;
 }
@@ -27,18 +35,26 @@ body {
 .taskItem, .projectItem{
     width: 100%;
     height: 150px;
-
+    border: groove;
+    border-style: solid;
     display: inline-block;
-
+    border-radius: 8px;
     overflow: auto;
+    border-color: #3A76B1;
+}
+.taskItem:hover, .projectItem:hover {
+    width: 100%;
+    height: 150px;
+    border: groove;
+    border-style: solid;
+    display: inline-block;
+    border-radius: 8px;
+    overflow: auto;
+    border-color: darkseagreen;
 }
 
-.taskItem:hover{
-    background-color: #bababa;
-}
-
-.projectItem:hover{
-    background-color: #bababa;
+.projectItem:hover, .taskItem:hover{
+    background-color: #d9edf7;
 }
 
 .btn-form{
@@ -57,4 +73,27 @@ body {
 
 .btn-form-delete{
     margin: 7px 50px 10px 10px;
+}
+
+.btn-save, .btn-return{
+    margin : 0px 0px 0px 0px;
+}
+
+.alignCenter{
+    padding-left: 30%;
+}
+
+.taskInfoHeader{
+    margin: 20px 0px 0px 0px;
+}
+.sender{
+    margin: 0px 0px 10px 0px;
+}
+
+.description, .taskInfoFooter{
+    margin: 0px 0px 0px 0px;
+}
+
+.taskInfoDesignatedHeader{
+    margin: 25px 0px 0px 0px;
 }

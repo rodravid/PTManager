@@ -9,27 +9,15 @@ class Project extends Model
 {
     use SoftDeletes;
 
-    private $id;
-
-    public function setId($project)
-    {
-        $this->$id = $project;
-    }
-    
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['title', 'description'];
 
     public static function boot()
     {
         parent::boot();
 
         static::deleting(function (Project $project) {
-            foreach ($project->tasks as $one) {
-                $one->delete();
+            foreach ($project->tasks as $task) {
+                $task->delete();
             }
         });
     }
@@ -37,6 +25,11 @@ class Project extends Model
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsToMany('User', 'project_user', 'project_id', 'user_id');
     }
 
 

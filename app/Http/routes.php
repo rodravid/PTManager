@@ -6,12 +6,12 @@ Route::group(['middleware' => ['web']], function() {
 
         Route::get('/projects', 'ProjectController@get')->name('projects.index');;
         Route::post('/projects/save', 'ProjectController@save')->name('projects.save');
-        Route::post('/projects/{id}/edit', 'ProjectController@edit');
+        Route::get('/projects/{id}/edit', 'ProjectController@edit');
         Route::patch('/projects/update/{id}', 'ProjectController@update');
 
         Route::delete('/projects/{id}/delete', 'ProjectController@delete');
 
-        Route::get('/tasks/view/{id}', 'TaskController@get');
+        Route::get('/project/{id}/tasks/view/{status}', 'TaskController@getTasksWithProject');
         Route::post('/tasks/save', 'TaskController@save')->name('tasks.save');
         Route::get('/task/{id}/edit', 'TaskController@edit')->name('tasks.edit');
         Route::patch('/task/{id}/update', 'TaskController@update');
@@ -23,5 +23,5 @@ Route::group(['middleware' => ['web']], function() {
 });
 
 Route::auth();
-Route::get('/', 'ProjectController@get');
-Route::get('/home', 'ProjectController@get');
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');

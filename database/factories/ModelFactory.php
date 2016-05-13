@@ -2,7 +2,7 @@
 
 $factory->define(App\Project::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word,
+        'title' => $faker->word,
         'description' => $faker->text,
     ];
 });

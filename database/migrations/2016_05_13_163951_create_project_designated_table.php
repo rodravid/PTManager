@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
-class CreateTableRFCODES extends Migration
+class CreateProjectDesignatedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +13,10 @@ class CreateTableRFCODES extends Migration
      */
     public function up()
     {
-        Schema::create('RF_CODES', function (Blueprint $table) {
+        Schema::create('project_user', function (Blueprint $table) {
             $table->increments('id')->unique();
-            $table->integer('ref_id');
-            $table->string('name');
-            $table->string('type');
+            $table->integer('project_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateTableRFCODES extends Migration
      */
     public function down()
     {
-        Schema::drop('RF_CODES');
+        //
     }
 }

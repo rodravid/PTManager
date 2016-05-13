@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Repositories\Project;
+namespace App\Interfaces;
 
 use Illuminate\Http\Request;
 
-interface ProjectRepositoryInterface
+interface TaskRepositoryInterface
 {
-    public function findById($id);
-
-    public function findAll();
+    public function getAll($project, $status);
 
     public function save(Request $request);
+
+    public function findById($id);
 
     public function update(Request $request, $id);
 

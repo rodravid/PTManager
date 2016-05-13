@@ -2,38 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TaskRequest;
-use App\Repositories\Task\TaskRepositoryInterface;
+use App\Interfaces\MainRepositoryInterface;
+use App\Interfaces\TaskRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
+use App\User;
 use Illuminate\Http\Request;
-use App\Task;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class TaskController extends Controller
 {
-    private $repository;
+    private $taskRepository;
+    private $mainRepository;
+    private $userRepository;
 
-    public function __construct(TaskRepositoryInterface $repository)
+    public function __construct(TaskRepositoryInterface $taskRepository, MainRepositoryInterface $mainRepository, UserRepositoryInterface $userRepository)
     {
-        $this->repository = $repository;
-    }
+        $this->taskRepository = $taskRepository;
+        $this->mainRepository = $mainRepository;
+        $this->userRepository = $userRepository;
 
-    public function get($project)
-    {
-        $info = $this->repository->find($project);
-        return view('task.tasks', compact('info'));
     }
-
+    
     public function save(Request $request)
     {
-        $this->repository->save($request);
+        $this->taskRepository->save($request);
         return redirect()->back();
 
     }
 
     public function edit($id)
     {
-        $task = $this->repository->findById($id);
+        $task = $this->taskRepository->findById($id);
 
         return view('task.editTask', compact('task'));
 
@@ -42,15 +42,42 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         //Validation
-        $this->repository->update($request, $id);
-
-        return redirect('/tasks/view/'.$request->project_id);
+        $this->taskRepository->update($request, $id);
+        $url = '/project/'.$request->all()['project_id'].'/tasks/view/'.$request->all()['status'];
+        return redirect($url);
     }
 
     public function delete($id)
     {
-        $task = Task::find($id);
-        $task->delete();
+        $this->taskRepository->delete($id);
+
         return redirect()->back();
+    }
+
+    public function getTasksWithProject($projectId, $taskStatus)
+    {
+        $return = $this->mainRepository->getTasksByProject($projectId, $taskStatus);
+        $return['Status'] = $taskStatus;
+
+        $return['TasksReturned'] = $this->addTaskOwner($return['TasksReturned']);
+        
+        return view('task.tasks', compact('return'));
+    }
+
+    public function addTaskOwner($tasks)
+    {
+        foreach ($tasks as $key => $task)
+        {
+
+            if ($task->user_id != 0)
+            {
+                $user_name = $this->userRepository->find($task->user_id);
+                $tasks[$key]['user_name'] = $user_name[$task->user_id];
+            }else{
+                $tasks[$key]['username'] = '';
+            }
+        }
+
+        return $tasks;
     }
 }
