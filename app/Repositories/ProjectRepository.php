@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Interfaces\ProjectRepositoryInterface;
 use App\Project;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
