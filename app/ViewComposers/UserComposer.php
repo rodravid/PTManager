@@ -2,13 +2,13 @@
 
 namespace App\ViewComposers;
 
-
 use App\User;
+use Illuminate\View\View;
 
 class UserComposer
 {
-    public function composer(View $view)
+    public function compose(View $view)
     {
-        $view->with('users', User::select('id', 'name')->pluck('name', 'id')->toArray());
+        $view->with('users', User::select('id', 'name')->get());
     }
 }

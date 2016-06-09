@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Project extends Model
 {
     use SoftDeletes;
-
+    protected $table = 'projects';
     protected $fillable = ['title', 'description'];
 
     public static function boot()
@@ -29,9 +29,7 @@ class Project extends Model
 
     public function user()
     {
-        return $this->belongsToMany('User', 'project_user', 'project_id', 'user_id');
+        return $this->belongsToMany(User::class, 'project_user', 'project_id', 'user_id');
     }
-
-
 
 }

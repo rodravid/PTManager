@@ -9,7 +9,7 @@
         <div class="container">
             <div class="formInputProject row">
                 <form class="projectForm" action="/projects/save" method="POST">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-4 col-md-offset-2">
                         <div class="form-group">
                             <input id="projectTitle" type="text" class="form-control" name="title" placeholder="Titulo do Projeto" required>
                         </div>
@@ -17,6 +17,16 @@
                             <textarea id="projectDescription" type="text" class="form-control" name="description" placeholder="Descrição" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-info btn-save">Salvar</button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <h4>Participantes:</h4>
+                        </div>
+                        <div class="row container">
+                            @foreach($users as $user)
+                                <input id="user{{ $user->id }}" type="checkbox" name="participants[]" value="{{ $user->id }}"><label for="user{{ $user->id }}">{{ $user->name }}</label><br>
+                            @endforeach
+                        </div>
                     </div>
                 </form>
             </div>
@@ -37,7 +47,13 @@
                                         <h2>#<label name="id">{{ $project->id }}</label> | <a id="project{{ $project->id }}Title" href="/project/{{ $project->id }}/tasks/view/1">{{ $project->title }}</a></h2>
                                         <h4 id="project{{ $project->id }}Description" name="description">{{ $project->description }}</h4>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <h3>Participantes: </h3>
+                                    @foreach ($project->user as $project_user)
+                                        <h4>{{ $project_user->name }}</h4>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-2">
                                     <ul class="nav navbar-nav navbar-right">
                                         <div class="row">
                                             <a href="/projects/{{ $project->id }}/edit" class="btn btn-warning btn-form-update">Editar</a>

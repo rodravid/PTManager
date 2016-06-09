@@ -19,6 +19,14 @@ class ComposerServiceProvider extends ServiceProvider
                 ],
             'App\ViewComposers\TaskComposer');
 
+        view()->composer([
+                    'project.editProject',
+                    'project.projects',
+                    'task.editTask',
+                    'task.tasks'
+                ],
+            'App\ViewComposers\UserComposer');
+
     }
 
     /**
