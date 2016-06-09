@@ -39,6 +39,7 @@
                         </div>
                 </div>
             @else
+                {{ dd($projects) }}
                 <div class="projects container">
                     @foreach($projects as $project)
                         <div class="projectItem row">
@@ -49,7 +50,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <h3>Participantes: </h3>
-                                    @foreach ($project->user as $project_user)
+                                    @foreach ($project->users as $project_user)
                                         <h4>{{ $project_user->name }}</h4>
                                     @endforeach
                                 </div>

@@ -20,7 +20,6 @@ class ProjectController extends Controller
     {
         $projects = $this->repository->getAll();
         return view('project.projects', compact('projects'));
-
     }
 
     /**

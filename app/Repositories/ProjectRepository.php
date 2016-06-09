@@ -19,9 +19,18 @@ class ProjectRepository implements ProjectRepositoryInterface
 
     public function getAll()
     {
-        return Project::with('user')
+        $authenticatedUser = Auth::user();
+
+        if ($authenticatedUser->name == "admin"){
+            return Project::with('users')
+                ->leftjoin('project_user', 'projects.id', '=', 'project_id')
+                ->where('projects.deleted_at', '=', null)
+                ->paginate(4);
+        }
+
+        return Project::with('users')
             ->join('project_user', 'projects.id', '=', 'project_id')
-            ->where('user_id', '=', '')
+            ->where('user_id', '=', $authenticatedUser->id)
             ->paginate(4);
 
     }
