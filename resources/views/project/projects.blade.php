@@ -39,7 +39,6 @@
                         </div>
                 </div>
             @else
-                {{ dd($projects) }}
                 <div class="projects container">
                     @foreach($projects as $project)
                         <div class="projectItem row">

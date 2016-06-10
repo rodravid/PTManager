@@ -13,26 +13,35 @@ class ProjectRepository implements ProjectRepositoryInterface
 
     public function findById($id)
     {
-        return Project::find($id);
-
+        return Project::with('users')
+            ->where('projects.id', '=', $id)
+            ->get();
     }
 
-    public function getAll()
+    public function getAll($perPage = 4)
     {
         $authenticatedUser = Auth::user();
 
         if ($authenticatedUser->name == "admin"){
-            return Project::with('users')
-                ->leftjoin('project_user', 'projects.id', '=', 'project_id')
-                ->where('projects.deleted_at', '=', null)
-                ->paginate(4);
+            // return Project::ofUser()->paginate($perPage);
+            return $this->getProjectQueryWithUser()->paginate(4);
         }
 
+        //return Project::ofUser($authenticatedUser->id)->paginate($perPage);
+
+        return $this->getProjectQueryWithUser()
+            ->where('users.id', '=', $authenticatedUser->id)
+            ->paginate(4);
+    }
+
+    public function getProjectQueryWithUser()
+    {
         return Project::with('users')
             ->join('project_user', 'projects.id', '=', 'project_id')
-            ->where('user_id', '=', $authenticatedUser->id)
-            ->paginate(4);
-
+            ->join('users', 'project_user.user_id', '=', 'users.id')
+            ->select('projects.id', 'projects.title', 'projects.description')
+            ->distinct()
+            ->where('projects.deleted_at', '=', null);
     }
 
     public function save(Request $request)
@@ -58,7 +67,7 @@ class ProjectRepository implements ProjectRepositoryInterface
     public function update(Request $request, $id)
     {
         Project::find($id)->update($request->all());
-        
+
     }
 
     public function delete($id)

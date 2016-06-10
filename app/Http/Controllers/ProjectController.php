@@ -15,7 +15,7 @@ class ProjectController extends Controller
     {
         $this->repository = $repository;
     }
-    
+
     public function get()
     {
         $projects = $this->repository->getAll();
@@ -43,27 +43,23 @@ class ProjectController extends Controller
 
         $this->repository->save($request);
         return redirect()->back();
-
     }
 
     public function update(Request $request, $id)
     {
         $this->repository->update($request, $id);
         return redirect()->route('projects.index');
-
     }
 
     public function edit($id)
     {
-        $project = $this->repository->findById($id);
+        $project = ($this->repository->findById($id)->first());
         return view('project.editProject', compact('project'));
-
     }
 
     public function delete($id)
     {
         $this->repository->delete($id);
         return redirect()->back();
-
     }
 }
