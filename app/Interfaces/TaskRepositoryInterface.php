@@ -12,6 +12,8 @@ interface TaskRepositoryInterface
 
     public function findById($id);
 
+    public function getByProject($projectId, $taskStatus);
+
     public function update(Request $request, $id);
 
     public function delete($id);

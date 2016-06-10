@@ -44,7 +44,6 @@ class TaskRepository implements TaskRepositoryInterface
     public function update(Request $request, $id)
     {
         Task::find($id)->update($request->all());
-
     }
 
     public function findById($id)

@@ -54,27 +54,25 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
-    public function getTasksWithProject($projectId, $taskStatus)
+    public function getTasksByProject($projectId, $taskStatus)
     {
         $return = $this->mainRepository->getTasksByProject($projectId, $taskStatus);
-        $return['Status'] = $taskStatus;
 
-        $return['TasksReturned'] = $this->addTaskOwner($return['TasksReturned']);
-        
-        return view('task.tasks', compact('return'));
+        $project = $return['ProjectReturned'];
+        $tasks = $this->addTaskOwner($return['TasksReturned']);
+
+        return view('task.tasks', compact('tasks', 'taskStatus', 'project'));
     }
 
     public function addTaskOwner($tasks)
     {
         foreach ($tasks as $key => $task)
         {
-
-            if ($task->user_id != 0)
-            {
+            if ($task->user_id != 0) {
                 $user_name = $this->userRepository->find($task->user_id);
                 $tasks[$key]['user_name'] = $user_name[$task->user_id];
             }else{
-                $tasks[$key]['username'] = '';
+                $tasks[$key]['user_name'] = '-';
             }
         }
 

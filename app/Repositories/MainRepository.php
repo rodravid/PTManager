@@ -23,7 +23,7 @@ class MainRepository implements MainRepositoryInterface
         $tasksReturned = $this->task->getByProject($projectId, $taskStatus);
 
         $return = [
-            'ProjectReturned' => $projectReturned,
+            'ProjectReturned' => $projectReturned->first(),
             'TasksReturned' => $tasksReturned
         ];
 
