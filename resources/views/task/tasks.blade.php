@@ -13,10 +13,15 @@
                     <div class="row">
                         <div class="col-md-4 col-md-offset-2">
                             <input type="hidden" name="project_id" class="form-control" value="{{ $project->id }}">
-                            <input type="text" name="title" class="form-control" placeholder="Titulo da Tarefa">
-                            <textarea type="text" name="description" class="form-control" placeholder="Descrição"></textarea>
+
+                            <div class="form-group">
+                                <input type="text" name="title" class="form-control" placeholder="Titulo da Tarefa">
+                            </div>
+                            <div class="form-group">
+                                <textarea type="text" name="description" class="form-control" placeholder="Descrição"></textarea>
+                            </div>
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-2 form-group">
                                     <h4>Status</h4>
                                 </div>
                                 <div class="col-md-10">
@@ -29,12 +34,38 @@
                             <button type="submit" class="btn btn-info btn-save">Salvar</button><a href="/projects" class="btn btn-default btn-return pull-right">Voltar</a>
                         </div>
                         <div class="col-md-4">
-                            <div class="row">
+                            <div class="row form-group">
                                 <div class="col-md-3">
                                     <h4>Prioridade</h4>
                                 </div>
                                 <div class="col-md-9">
                                     {{ Form::select('priority', $task_priority, 2, ['class'=>'form-control']) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default dropdown-toggle fill-row" type="button" id="participants" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Designado à
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu fill-row" aria-labelledby="participants">
+                                            <li>
+                                                <a href="#">
+                                                    <input id="admin" type="checkbox" name="participants[]" value="1" checked="checked" disabled="disabled">
+                                                    <label for="admin">admin</label><br>
+                                                </a>
+                                            </li>
+                                            @foreach($users as $user)
+                                                <li>
+                                                    <a href="#">
+                                                        <input id="user{{ $user->id }}" type="checkbox" name="participants[]" value="{{ $user->id }}">
+                                                        <label for="user{{ $user->id }}">{{ $user->name }}</label><br>
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +86,7 @@
                     <div class="navigation-tabs row">
                         <div class="col-md-8">
                             <ul class="nav nav-tabs">
-                            @foreach($status_open as $key => $open)
+                                @foreach($status_open as $key => $open)
                                     <li class="{{ ($taskStatus == $key) ? 'active' : '' }}">
                                         <a href="/project/{{ $project->id }}/tasks/view/{{ $key }}">{{ $open }}</a>
                                     </li>

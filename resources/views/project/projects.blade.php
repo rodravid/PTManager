@@ -9,24 +9,41 @@
         <div class="container">
             <div class="formInputProject row">
                 <form class="projectForm" action="/projects/save" method="POST">
-                    <div class="col-md-4 col-md-offset-2">
-                        <div class="form-group">
+                    <div class="col-md-10 col-md-offset-2 form-group">
+                        <div class="col-md-6 remove-padding-left">
                             <input id="projectTitle" type="text" class="form-control" name="title" placeholder="Titulo do Projeto" required>
                         </div>
-                        <div class="form-group">
-                            <textarea id="projectDescription" type="text" class="form-control" name="description" placeholder="Descrição" required></textarea>
+                        <div class="col-md-6 remove-padding-right">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle fill-row" type="button" id="participants" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Designado à
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu fill-row" aria-labelledby="participants">
+                                    <li>
+                                        <a href="#">
+                                            <input id="admin" type="checkbox" name="participants[]" value="1" checked="checked" disabled="disabled">
+                                            <label for="admin">admin</label><br>
+                                        </a>
+                                    </li>
+                                    @foreach($users as $user)
+                                        <li for="user{{ $user->id }}">
+                                            <a href="#">
+                                                <input id="user{{ $user->id }}" type="checkbox" name="participants[]" value="{{ $user->id }}">
+                                                <label for="user{{ $user->id }}">{{ $user->name }}</label><br>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-info btn-save">Salvar</button>
                     </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <h4>Participantes:</h4>
+                    <div class="col-md-10 col-md-offset-2">
+                        <div class="form-group">
+                            <textarea id="projectDescription" type="text" class="form-control" name="description"
+                                      placeholder="Descrição" required></textarea>
                         </div>
-                        <div class="row container">
-                            @foreach($users as $user)
-                                <input id="user{{ $user->id }}" type="checkbox" name="participants[]" value="{{ $user->id }}"><label for="user{{ $user->id }}">{{ $user->name }}</label><br>
-                            @endforeach
-                        </div>
+                    <button type="submit" class="btn btn-info btn-save">Salvar</button>
                     </div>
                 </form>
             </div>

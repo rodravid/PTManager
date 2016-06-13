@@ -26,6 +26,7 @@ class TaskController extends Controller
     
     public function save(Request $request)
     {
+        dd($request->all());
         $this->taskRepository->save($request);
         return redirect()->back();
 

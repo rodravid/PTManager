@@ -49,14 +49,17 @@ class ProjectRepository implements ProjectRepositoryInterface
         Project::create($request->all());
         $project = Project::get()->last();
 
-        $this->addParticipants($request->participants, $project);
+        if (empty($request->participants)) {
+            return redirect()->back();
+        }
 
+        $this->addParticipants($request->participants, $project);
     }
 
     public function addParticipants(Array $participants, Project $project)
     {
         $project_id = $project->id;
-        foreach ($participants as $participant){
+        foreach ($participants as $participant) {
             DB::table('project_user')->insert([
                 'project_id' => $project_id,
                 'user_id' => $participant
