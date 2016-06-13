@@ -54,10 +54,15 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function getByProject($projectId, $taskStatus)
     {
-        $tasks = Task::where([
-                    ['project_id', '=', $projectId],
-                    ['status', '=', $taskStatus]
-                ])->paginate(3);
+        $tasks = Task::with('users')
+                     ->join('tasks_users', 'tasks_users.task_id', '=', 'tasks.id')
+                     ->join('users', 'tasks_users.user_id', '=', 'users.id')
+                     ->where([
+                         ['tasks.project_id', '=', $projectId],
+                         ['tasks.status', '=', $taskStatus]
+                     ])
+                     ->distinct()
+                     ->paginate(3);
 
         return $tasks;
     }

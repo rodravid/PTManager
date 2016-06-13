@@ -37,11 +37,11 @@ class ProjectRepository implements ProjectRepositoryInterface
     public function getProjectQueryWithUser()
     {
         return Project::with('users')
-            ->join('project_user', 'projects.id', '=', 'project_id')
-            ->join('users', 'project_user.user_id', '=', 'users.id')
-            ->select('projects.id', 'projects.title', 'projects.description')
-            ->distinct()
-            ->where('projects.deleted_at', '=', null);
+                      ->join('project_user', 'projects.id', '=', 'project_id')
+                      ->join('users', 'project_user.user_id', '=', 'users.id')
+                      ->select('projects.id', 'projects.title', 'projects.description')
+                      ->distinct()
+                      ->where('projects.deleted_at', '=', null);
     }
 
     public function save(Request $request)

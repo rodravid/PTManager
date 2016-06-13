@@ -6,6 +6,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,5 +30,10 @@ class User extends Authenticatable
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'project_user', 'project_id', 'user_id');
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(User::class, 'tasks_users', 'user_id', 'task_id');
     }
 }

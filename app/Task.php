@@ -9,6 +9,7 @@ use Robbo\Presenter\PresentableInterface;
 class Task extends Model implements PresentableInterface
 {
 
+    protected $table = 'tasks';
     protected $fillable = ['project_id', 'user_id', 'status', 'priority','title', 'description'];
 
     public function project()
@@ -24,6 +25,11 @@ class Task extends Model implements PresentableInterface
     public function priority()
     {
         return $this->hasOne(RF_CODES::Class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'tasks_users', 'task_id', 'user_id');
     }
     
     public function getPresenter()

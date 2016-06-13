@@ -57,7 +57,7 @@ class TaskController extends Controller
         $return = $this->mainRepository->getTasksByProject($projectId, $taskStatus);
         $project = $return['ProjectReturned'];
         $tasks = $this->addTaskOwner($return['TasksReturned']);
-
+        
         return view('task.tasks', compact('tasks', 'taskStatus', 'project'));
     }
 
