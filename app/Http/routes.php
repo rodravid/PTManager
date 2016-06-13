@@ -18,8 +18,7 @@ Route::group(['middleware' => ['web']], function() {
         Route::delete('/task/{id}/delete', 'TaskController@delete');
 
     });
-
-
+    
 });
 
 Route::auth();
