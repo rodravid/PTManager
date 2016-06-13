@@ -58,7 +58,7 @@
             @else
                 <div class="projects container">
                     @foreach($projects as $project)
-                        <div class="projectItem row">
+                        <div class="projectItem row overflow">
                             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                                 <div class="col-md-6">
                                         <h2>#<label name="id">{{ $project->id }}</label> | <a id="project{{ $project->id }}Title" href="/project/{{ $project->id }}/tasks/view/1">{{ $project->title }}</a></h2>
@@ -66,9 +66,11 @@
                                 </div>
                                 <div class="col-md-4">
                                     <h3>Participantes: </h3>
-                                    @foreach ($project->users as $project_user)
-                                        <h4>{{ $project_user->name }}</h4>
-                                    @endforeach
+                                    <div class="overflow participants">
+                                        @foreach ($project->users as $project_user)
+                                            <h4>{{ $project_user->name }}</h4>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <div class="col-md-2">
                                     <ul class="nav navbar-nav navbar-right">

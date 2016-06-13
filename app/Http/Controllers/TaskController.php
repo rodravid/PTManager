@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Interfaces\MainRepositoryInterface;
 use App\Interfaces\TaskRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
-use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Illuminate\Support\Facades\URL;
 
 class TaskController extends Controller
 {
@@ -26,7 +24,6 @@ class TaskController extends Controller
     
     public function save(Request $request)
     {
-        dd($request->all());
         $this->taskRepository->save($request);
         return redirect()->back();
 
@@ -58,7 +55,6 @@ class TaskController extends Controller
     public function getTasksByProject($projectId, $taskStatus)
     {
         $return = $this->mainRepository->getTasksByProject($projectId, $taskStatus);
-
         $project = $return['ProjectReturned'];
         $tasks = $this->addTaskOwner($return['TasksReturned']);
 

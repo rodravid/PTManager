@@ -10,33 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskRepository implements TaskRepositoryInterface
 {
-    public function getAll($project, $status)
-    {
-        $projects = Project::with(['tasks' => function($query) use ($status, $project) {
-
-            $query->whereStatus($status);
-
-        }])->find($project);
-
-        $info['Tasks'] = Task::where([
-            ['status', '=', $status],
-            ['project_id', '=', $project]
-        ])->get();
-
-        $info[0] = $projects->tasks;
-        $info[1] = $projects->id;
-        $info[2] = $projects->name;
-
-        return $info;
-    }
-
     public function save(Request $request)
     {
-
         $request = $request->all();
 
         $user = Auth::user();
-        $request['user_id'] = (String) $user['id'];
+        $request['user_id'] = (int) $user['id'];
 
         Task::create($request);
     }
@@ -44,6 +23,23 @@ class TaskRepository implements TaskRepositoryInterface
     public function update(Request $request, $id)
     {
         Task::find($id)->update($request->all());
+    }
+
+    public function designateTaskToUser($users, $taskId = null)
+    {
+        if (!empty($taskId)){
+            DB::Table('tasks_users')
+                ->select('*')
+                ->where('task_id', '=', $taskId)
+                ->delete();
+        }
+
+        foreach ($users as $user){
+            DB::table('tasks_user')
+                ->insert([
+
+                ]);
+        }
     }
 
     public function findById($id)
@@ -58,9 +54,11 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function getByProject($projectId, $taskStatus)
     {
-        return Task::where([
+        $tasks = Task::where([
                     ['project_id', '=', $projectId],
                     ['status', '=', $taskStatus]
                 ])->paginate(3);
+
+        return $tasks;
     }
 }

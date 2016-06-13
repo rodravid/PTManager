@@ -15,7 +15,7 @@ class ProjectRepository implements ProjectRepositoryInterface
     {
         return Project::with('users')
             ->where('projects.id', '=', $id)
-            ->get();
+            ->first();
     }
 
     public function getAll($perPage = 4)
@@ -70,7 +70,6 @@ class ProjectRepository implements ProjectRepositoryInterface
     public function update(Request $request, $id)
     {
         Project::find($id)->update($request->all());
-
     }
 
     public function delete($id)

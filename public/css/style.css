@@ -66,7 +66,6 @@ textarea{
     border-style: solid;
     display: inline-block;
     border-radius: 8px;
-    overflow: auto;
     border-color: #3A76B1;
 }
 .taskItem:hover, .projectItem:hover {
@@ -76,11 +75,19 @@ textarea{
     border-style: solid;
     display: inline-block;
     border-radius: 8px;
-    overflow: auto;
     border-color: darkseagreen;
 }
 .projectItem:hover, .taskItem:hover{
     background-color: #d9edf7;
+}
+.overflow{
+    overflow: auto;
+}
+.participants{
+    height: 90px;
+    border-style: groove;
+    padding: 0px 0px 0px 10px;
+    border-radius: 7px;
 }
 .btn-form{
     margin: 30px 50px 0px 10px;

@@ -12,10 +12,21 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $this->seed('admin', 'admin@admin.com.br', 'w11admin');
+        $this->seed('Rodrigo David de Oliveira', 'roliveira@webeleven.com.br', 'w11admin');
+        $this->seed('Felipe Alcantara', 'falcantara@webeleven.com.br', 'w11admin');
+        $this->seed('Thiago Del Ré Cavallini', 'tcavallini@webeleven.com.br', 'w11admin');
+        $this->seed('Wellington Silva', 'wsilva@webeleven.com.br', 'w11admin');
+    }
+
+    public function seed($name, $email, $password)
+    {
         $user = new User();
-        $user->name = 'admin';
-        $user->email = 'admin@admin.com.br';
-        $user->password = bcrypt('w11admin');
+        
+        $user->name = $name;
+        $user->email = $email;
+        $user->password = bcrypt($password);
+
         $user->save();
     }
 }
