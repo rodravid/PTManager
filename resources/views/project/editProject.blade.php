@@ -31,7 +31,11 @@
                                 @foreach($users as $user)
                                     <li for="user{{ $user->id }}">
                                         <a href="#">
-                                            <input id="user{{ $user->id }}" type="checkbox" name="participants[]" value="{{ $user->id }}">
+                                            <input id="user{{ $user->id }}" type="checkbox" name="participants[]" value="{{ $user->id }}"
+                                                    @if ($project->containsParticipant($user))
+                                                        checked="checked"
+                                                    @endif
+                                            >
                                             <label for="user{{ $user->id }}">{{ $user->name }}</label><br>
                                         </a>
                                     </li>

@@ -14,12 +14,12 @@ class Task extends Model implements PresentableInterface
 
     public function project()
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(Project::class, 'projects', 'projects.id', 'tasks.project_id');
     }
 
     public function status()
     {
-        return $this->hasOne(RF_CODES::class);
+        return $this->hasOne(RF_CODES::class, 'RF_CODES', 'RF_CODES.ref_id', 'tasks.status');
     }
 
     public function priority()

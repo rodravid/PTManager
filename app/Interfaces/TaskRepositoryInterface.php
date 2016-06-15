@@ -2,6 +2,7 @@
 
 namespace App\Interfaces;
 
+use App\Task;
 use Illuminate\Http\Request;
 
 interface TaskRepositoryInterface

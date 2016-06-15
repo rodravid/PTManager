@@ -53,7 +53,7 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
-        $project = ($this->repository->findById($id));
+        $project = $this->repository->findById($id);
         return view('project.editProject', compact('project'));
     }
 

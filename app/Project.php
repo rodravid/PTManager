@@ -32,4 +32,13 @@ class Project extends Model
         return $this->belongsToMany(User::class, 'project_user', 'project_id', 'user_id');
     }
 
+    public function containsParticipant(User $user)
+    {
+        foreach($this->users as $participant){
+            if ($participant->id == $user->id)
+                return true;
+        }
+
+        return false;
+    }
 }

@@ -123,9 +123,11 @@
 
                                     <div class="col-md-5">
                                         <h4 class="taskInfoDesignatedHeader">Designado para:</h4>
-                                        <ul>
-
-                                        </ul>
+                                        <div class="overflow participants">
+                                            @foreach ($task->users as $task_user)
+                                                <h4>{{ $task_user->name }}</h4>
+                                            @endforeach
+                                        </div>
                                     </div>
 
                                     <div class="pull-right col-md-2">
