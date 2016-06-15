@@ -72,7 +72,37 @@
                     </div>
                 </form>
             </div>
-            <h1>Tarefas | {{ $project->title }}</h1>
+            <div class="row">
+                <h1>
+                    <div class="col-md-4">
+                        Tarefas | Projeto:
+                    </div>
+                    <div class="col-md-5">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle fill-row" type="button" id="participants" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Projeto
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu fill-row" aria-labelledby="participants">
+                                <li>
+                                    <a href="#">
+                                        <input id="admin" type="checkbox" name="participants[]" value="1" checked="checked" disabled="disabled">
+                                        <label for="admin">admin</label><br>
+                                    </a>
+                                </li>
+                                @foreach($projects as $projectId => $projectTitle)
+                                    <li>
+                                        <a href="#">
+                                            <input id="project{{ $projectId }}" type="checkbox" name="projects[]" value="{{ $projectId }}">
+                                            <label for="project{{ $projectId }}">{{ $projectTitle }}</label><br>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </h1>
+            </div>
             <section class="tasksField">
                 <div class="tasks">
                     <div class="row">
@@ -114,14 +144,17 @@
                         @else
                             @foreach($tasks as $key => $task)
                                 <div class="taskItem row">
-                                    <div class="col-md-5 overlay">
-                                        <h2 class="taskInfoHeader">#{{ $key+1 }} | {{ $task->title }}</h2>
-                                        <h3 class="sender"><b>Designado por: </b>{{ $task->user_name }}</h3>
-                                        <h4  class="description" name="description">{{ $task->description }}</h4>
-                                        <h4 class="taskInfoFooter"><b>STATUS:</b> {{ $task->getPresenter()->status }}  |  <b>Prioridade: </b>{{ $task->getPresenter()->priority }}</h4>
+                                    <div class="col-md-4 overlay">
+                                        <h2 class="taskInfoHeader">#{{ $key+1 }} | <a href="">{{ $task->title }}</a></h2>
+                                        <h3 class="sender"><b>Projeto: </b>{{ $project->title }}</h3>
+                                        <h4  class="" name="description">{{ $task->description }}</h4>
                                     </div>
-
-                                    <div class="col-md-5">
+                                    <div class="col-md-3 details">
+                                        <h4 class="taskInfoFooter"><b>STATUS:</b> {{ $task->getPresenter()->status }}</h4>
+                                        <h4><b>Prioridade: </b>{{ $task->getPresenter()->priority }}</h4>
+                                        <h4 class="sender"><b>Designado por: </b>{{ $task->user_name }}</h4>
+                                    </div>
+                                    <div class="col-md-3">
                                         <h4 class="taskInfoDesignatedHeader">Designado para:</h4>
                                         <div class="overflow participants">
                                             @foreach ($task->users as $task_user)
@@ -131,10 +164,16 @@
                                     </div>
 
                                     <div class="pull-right col-md-2">
-                                        <a href="/task/{{ $task->id }}/edit" class="btn btn-warning btn-form">Visualizar</a>
+                                        <a href="/task/{{ $task->id }}/edit" class="btn btn-warning btn-form">
+                                            Editar
+                                            <i class="fa fa-pencil-square-o margin-icon" aria-hidden="true"></i>
+                                        </a>
                                         <form action="/task/{{ $task->id }}/delete" method="POST">
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger btn-form-delete">Excluir</button>
+                                            <button type="submit" class="btn btn-danger btn-form-delete">
+                                                Excluir
+                                                <i class="fa fa-trash-o margin-icon" aria-hidden="true"></i>
+                                            </button>
                                         </form>
                                     </div>
                                 </div>
@@ -148,4 +187,8 @@
             </section>
         </div>
     </section>
+@stop
+
+@section('footer')
+
 @stop

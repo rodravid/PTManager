@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -34,6 +34,6 @@ class User extends Authenticatable
 
     public function tasks()
     {
-        return $this->belongsToMany(User::class, 'tasks_users', 'task_id', 'user_id');
+        return $this->belongsToMany(Task::class, 'tasks_users', 'task_id', 'user_id');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Presenters\TaskPresenter;
 use Illuminate\Database\Eloquent\Model;

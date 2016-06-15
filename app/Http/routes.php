@@ -11,7 +11,7 @@ Route::group(['middleware' => ['web']], function() {
 
         Route::delete('/projects/{id}/delete', 'ProjectController@delete');
 
-        Route::get('/project/{id}/tasks/view/{status}', 'TaskController@getTasksByProject');
+        Route::get('/project/{id}/tasks/view/{status}', 'TaskController@getTasksByProject')->name('viewTasks');
         Route::post('/tasks/save', 'TaskController@save')->name('tasks.save');
         Route::get('/task/{id}/edit', 'TaskController@edit')->name('tasks.edit');
         Route::patch('/task/{id}/update', 'TaskController@update');

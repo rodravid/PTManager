@@ -80,6 +80,11 @@ textarea{
 .projectItem:hover, .taskItem:hover{
     background-color: #d9edf7;
 }
+.align-input-cbxProjects{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px 0px 0px -100px;
+}
 .overflow{
     overflow: auto;
 }
@@ -111,8 +116,11 @@ textarea{
 .taskInfoHeader{
     margin: 20px 0px 0px 0px;
 }
+.details{
+    margin: 25px 0px 0px 0px;
+}
 .sender{
-    margin: 0px 0px 10px 0px;
+    margin: 0px 0px 0px 0px;
 }
 .description, .taskInfoFooter{
     margin: 0px 0px 0px 0px;
@@ -128,4 +136,7 @@ textarea{
 }
 .remove-padding-right{
     padding-right: 0px;
+}
+.margin-icon{
+    margin: 0px 0px 0px 3px;
 }
