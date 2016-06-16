@@ -23,18 +23,15 @@ class ProjectRepository implements ProjectRepositoryInterface
         $authenticatedUser = Auth::user();
 
         if ($authenticatedUser->name == "admin"){
-            return $this->getProjectQueryWithUser()->paginate(4);
+            return Project::with('users')->where('projects.deleted_at', '=', null)->paginate(4);
         }
 
-        return $this->getProjectQueryWithUser()
-                    ->where('user_id', '=', $authenticatedUser->id)
-                    ->paginate(4);
-    }
-
-    public function getProjectQueryWithUser()
-    {
         return Project::with('users')
-                      ->where('projects.deleted_at', '=', null);
+                      ->where('projects.deleted_at', '=', null)
+                      ->whereHas('users', function($query) use ($authenticatedUser) {
+                          $query->where('users.id', $authenticatedUser->id);
+                      })
+                      ->paginate(4);
     }
 
     public function save(Request $request)

@@ -15,7 +15,7 @@ class TaskRepository implements TaskRepositoryInterface
         $request = $request->all();
 
         $user = Auth::user();
-        $request['user_id'] = (int) $user['id'];
+        $request['user_id'] = $user['id'];
 
         $taskCreated = Task::create($request);
         $this->designateTaskToUser($request['participants'], $taskCreated['id']);
@@ -62,11 +62,23 @@ class TaskRepository implements TaskRepositoryInterface
         $authenticatedUser = Auth::user();
 
         if ($authenticatedUser->name == "admin") {
-            return $this->getBaseQuery($projectId, $taskStatus)->paginate(3);
+            return Task::with('users')
+                       ->where([
+                           ['tasks.project_id', '=', $projectId],
+                           ['tasks.status', '=', $taskStatus]
+                       ])
+                       ->paginate(3);
         }
-        return $this->getBaseQuery($projectId, $taskStatus)
-                    ->where('tasks_users.user_id', '=', $authenticatedUser->id)
-                    ->paginate(3);
+        
+        return Task::with('users')
+                   ->where([
+                       ['tasks.project_id', '=', $projectId],
+                       ['tasks.status', '=', $taskStatus]
+                   ])
+                   ->whereHas('users', function ($query) use ($authenticatedUser) {
+                       $query->where('users.id', '=', $authenticatedUser->id);
+                   })
+                   ->paginate(3);
     }
 
     private function getBaseQuery($projectId, $taskStatus)

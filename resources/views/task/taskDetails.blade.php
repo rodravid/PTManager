@@ -77,29 +77,22 @@
                     <div class="col-md-4">
                         Tarefas
                     </div>
-                    <div class="btn-group col-md-offset-3 col-md-5" role="group">
-                        <div class="btn-group btn-group-justified">
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-default dropdown-toggle fill-row" type="button" id="participants" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Filtrar por Projetos
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu fill-row" aria-labelledby="participants">
-                                    @foreach($projects as $projectId => $projectTitle)
-                                        <li>
-                                            <a href="#">
-                                                <input id="project{{ $projectId }}" type="checkbox" name="projects[]" value="{{ $projectId }}" {{ ($project->id == $projectId) ? 'checked="checked"' : '' }}>
-                                                <label for="project{{ $projectId }}">{{ $projectTitle }}</label><br>
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <div class="btn-group" role="group">
-                                <a href="" class="btn btn-default">
-                                    Filtrar
-                                </a>
-                            </div>
+                    <div class="col-md-offset-3 col-md-5">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle fill-row" type="button" id="participants" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Projetos
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu fill-row" aria-labelledby="participants">
+                                @foreach($projects as $projectId => $projectTitle)
+                                    <li>
+                                        <a href="#">
+                                            <input id="project{{ $projectId }}" type="checkbox" name="projects[]" value="{{ $projectId }}" {{ ($project->id == $projectId) ? 'checked="checked"' : '' }}>
+                                            <label for="project{{ $projectId }}">{{ $projectTitle }}</label><br>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </h1>
@@ -135,6 +128,7 @@
                         </div>
                     </div>
 
+
                     <!-- Listagem de Tasks -->
                     <div class="contentTasks">
                         @if($tasks->isEmpty())
@@ -154,7 +148,7 @@
                                         <h4><b>Prioridade: </b>{{ $task->getPresenter()->priority }}</h4>
                                     </div>
                                     <div class="col-md-3">
-                                        <h4 class="taskInfoDesignatedHeader">Responsáveis:</h4>
+                                        <h4 class="taskInfoDesignatedHeader">Responsável:</h4>
                                         <div class="overflow participants">
                                             @foreach ($task->users as $task_user)
                                                 <h4>{{ $task_user->name }}</h4>

@@ -16,7 +16,7 @@
                         <div class="col-md-6 remove-padding-right">
                             <div class="dropdown">
                                 <button class="btn btn-default dropdown-toggle fill-row" type="button" id="participants" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Designado à
+                                    Participantes
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu fill-row" aria-labelledby="participants">
@@ -26,6 +26,8 @@
                                             <label for="admin">admin</label><br>
                                         </a>
                                     </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Desenvolvedores</li>
                                     @foreach($users as $user)
                                         <li for="user{{ $user->id }}">
                                             <a href="#">
@@ -34,6 +36,7 @@
                                             </a>
                                         </li>
                                     @endforeach
+                                    <li role="separator" class="divider"></li>
                                 </ul>
                             </div>
                         </div>
