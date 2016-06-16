@@ -143,3 +143,6 @@ textarea{
 .project-title{
     margin: 0px 0px 8px 0px;
 }
+.remove-margin-top{
+    margin: 0px 16px 0px 16px;
+}

@@ -16,22 +16,22 @@
 
                             <div class="form-group">
                                 <input type="text" name="title" class="form-control" placeholder="Titulo da Tarefa">
-                            </div>
-                            <div class="form-group">
                                 <textarea type="text" name="description" class="form-control" placeholder="Descrição"></textarea>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2 form-group">
-                                    <h4>Status</h4>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4>Status</h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        {{ Form::select('status', [
+                                                    'Aberto' => $status_open,
+                                                    'Fechado' => $status_closed
+                                                                  ], null, ['class'=>'form-control']) }}
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    {{ Form::select('status', [
-                                                'Aberto' => $status_open,
-                                                'Fechado' => $status_closed
-                                                              ], null, ['class'=>'form-control']) }}
-                                </div>
+                                <button type="submit" class="btn btn-info btn-save">Salvar</button><a href="/projects" class="btn btn-default btn-return pull-right">Voltar</a>
                             </div>
-                            <button type="submit" class="btn btn-info btn-save">Salvar</button><a href="/projects" class="btn btn-default btn-return pull-right">Voltar</a>
                         </div>
                         <div class="col-md-4">
                             <div class="row form-group">
@@ -108,10 +108,10 @@
                 <div class="tasks">
                     <div class="row">
                         <div class="col-md-8">
-                            <h3 class="text-left">Abertas</h3>
+                            <h3 class="text-left remove-margin-top">Abertas</h3>
                         </div>
                         <div class="col-md-4">
-                            <h3 class="text-right">Fechadas</h3>
+                            <h3 class="text-right remove-margin-top">Fechadas</h3>
                         </div>
                     </div>
                     <div class="navigation-tabs row">

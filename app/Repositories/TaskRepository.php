@@ -80,13 +80,4 @@ class TaskRepository implements TaskRepositoryInterface
                    })
                    ->paginate(3);
     }
-
-    private function getBaseQuery($projectId, $taskStatus)
-    {
-        return Task::with('users')
-                   ->where([
-                        ['tasks.project_id', '=', $projectId],
-                        ['tasks.status', '=', $taskStatus]
-                   ]);
-    }
 }
