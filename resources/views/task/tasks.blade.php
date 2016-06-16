@@ -56,7 +56,7 @@
                                                     <label for="admin">admin</label><br>
                                                 </a>
                                             </li>
-                                            @foreach($users as $user)
+                                            @foreach($project->users as $user)
                                                 <li>
                                                     <a href="#">
                                                         <input id="user{{ $user->id }}" type="checkbox" name="participants[]" value="{{ $user->id }}">

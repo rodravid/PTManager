@@ -57,4 +57,19 @@ class TaskController extends Controller
 
         return view('task.tasks', compact('tasks', 'taskStatus', 'project'));
     }
+
+    public function addTaskOwner($tasks)
+    {
+        foreach ($tasks as $key => $task)
+        {
+            if ($task->user_id != 0) {
+                $user_name = $this->user->find($task->user_id);
+                $tasks[$key]['user_name'] = $user_name[$task->user_id];
+            }else{
+                $tasks[$key]['user_name'] = '-';
+            }
+        }
+
+        return $tasks;
+    }
 }

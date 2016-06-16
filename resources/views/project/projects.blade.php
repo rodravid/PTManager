@@ -9,7 +9,7 @@
         <div class="container">
             <div class="formInputProject row">
                 <form class="projectForm" action="/projects/save" method="POST">
-                    <div class="col-md-10 col-md-offset-2 form-group">
+                    <div class="col-md-8 col-md-offset-2 form-group">
                         <div class="col-md-6 remove-padding-left">
                             <input id="projectTitle" type="text" class="form-control" name="title" placeholder="Titulo do Projeto" required>
                         </div>
@@ -41,17 +41,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-10 col-md-offset-2">
+                    <div class="col-md-8 col-md-offset-2">
                         <div class="form-group">
                             <textarea id="projectDescription" type="text" class="form-control" name="description"
                                       placeholder="Descrição" required></textarea>
                         </div>
-                    <button type="submit" class="btn btn-info btn-save">Salvar</button>
+                    <button type="submit" class="btn btn-info btn-save fill-row">Salvar</button>
                     </div>
                 </form>
             </div>
-
-            <h1>Projetos</h1>
+            <div class="row">
+                <div class="col-md-3">
+                    <h1>Projetos</h1>
+                </div>
+                <div class="col-md-9">
+                    <div class="pull-right">
+                        {!! $projects->links() !!}
+                    </div>
+                </div>
+            </div>
             @if($projects->isEmpty())
                 <div class="projects container">
                         <div class="projectItemFailed row">
@@ -89,9 +97,6 @@
                             </div>
                         </div>
                     @endforeach
-                </div>
-                <div class="alignCenter">
-                    {!! $projects->links() !!}
                 </div>
             @endif
         </div>
